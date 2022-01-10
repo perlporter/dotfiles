@@ -1,0 +1,148 @@
+#
+#
+#    ____    ___  ____   _      ____    ___   ____  ______    ___  ____
+#   |    \  /  _]|    \ | T    |    \  /   \ |    \|      T  /  _]|    \
+#   |  o  )/  [_ |  D  )| |    |  o  )Y     Y|  D  )      | /  [_ |  D  )
+#   |   _/Y    _]|    / | l___ |   _/ |  O  ||    /l_j  l_jY    _]|    /
+#   |  |  |   [_ |    \ |     T|  |   |     ||    \  |  |  |   [_ |    \
+#   |  |  |     T|  .  Y|     ||  |   l     !|  .  Y |  |  |     T|  .  Y
+#   l__j  l_____jl__j\_jl_____jl__j    \___/ l__j\_j l__j  l_____jl__j\_j
+#
+#
+#
+#     Personal .zshrc file of Wendell Borges <perlporter@gmail.com>
+#
+
+# Plugins {{{
+# ==============================================================================
+
+    # Load the Antibody plugin manager for zsh.
+    source <(antibody init)
+
+    # Setup required env var for oh-my-zsh plugins
+    export ZSH="$(antibody home)/https-COLON--SLASH--SLASH-github.com-SLASH-robbyrussell-SLASH-oh-my-zsh"
+
+    antibody bundle robbyrussell/oh-my-zsh
+    antibody bundle robbyrussell/oh-my-zsh path:plugins/aliases
+    antibody bundle robbyrussell/oh-my-zsh path:plugins/brew
+    antibody bundle robbyrussell/oh-my-zsh path:plugins/command-not-found
+    antibody bundle robbyrussell/oh-my-zsh path:plugins/colored-man-pages
+    antibody bundle robbyrussell/oh-my-zsh path:plugins/docker
+    antibody bundle robbyrussell/oh-my-zsh path:plugins/docker-compose
+    antibody bundle robbyrussell/oh-my-zsh path:plugins/fzf
+    antibody bundle robbyrussell/oh-my-zsh path:plugins/git
+    antibody bundle robbyrussell/oh-my-zsh path:plugins/git-flow
+    antibody bundle robbyrussell/oh-my-zsh path:plugins/kubectl
+    antibody bundle robbyrussell/oh-my-zsh path:plugins/nmap
+    antibody bundle robbyrussell/oh-my-zsh path:plugins/rsync
+    antibody bundle robbyrussell/oh-my-zsh path:plugins/ssh-agent
+    antibody bundle robbyrussell/oh-my-zsh path:plugins/thefuck
+    antibody bundle robbyrussell/oh-my-zsh path:plugins/tmux
+    antibody bundle robbyrussell/oh-my-zsh path:plugins/tmuxinator
+    antibody bundle robbyrussell/oh-my-zsh path:plugins/z
+
+    # Other bundles
+    antibody bundle agkozak/zsh-z
+    antibody bundle zsh-users/zsh-autosuggestions
+    antibody bundle zsh-users/zsh-completions
+    antibody bundle zsh-users/zsh-history-substring-search
+    antibody bundle zsh-users/zsh-syntax-highlighting
+
+    # Load the theme.
+    antibody bundle dracula/zsh
+
+# }}}
+
+# Configuration {{{
+# ==============================================================================
+
+    HYPHEN_INSENSITIVE="true"
+    ENABLE_CORRECTION="false"
+    COMPLETION_WAITING_DOTS="true"
+    HIST_STAMPS="yyyy-mm-dd"
+
+    typeset -U path cdpath fpath
+
+    # Vim mode
+    bindkey -v
+    export KEYTIMEOUT=1
+
+    export LANG=en_US.UTF-8
+    export LC_ALL=${LANG}
+
+    # Use Neovim as "preferred editor"
+    export VISUAL=nvim
+    export EDITOR="$VISUAL"
+
+    path=(
+        $HOME/bin
+        /opt/homebrew/bin
+        $path
+    )
+
+    setopt auto_cd
+
+    zstyle ':completion:*' group-name ''
+    zstyle ':completion:*:descriptions' format %d
+    zstyle ':completion:*:descriptions' format %B%d%b
+    zstyle ':completion:*:complete:(cd|pushd):*' tag-order \
+            'local-directories named-directories'
+
+    export NVIM_LISTEN_ADDRESS='/tmp/nvimsocket'
+    export FZF_DEFAULT_COMMAND='ag -u -g ""'
+
+    unsetopt sharehistory
+
+# }}}
+
+# Aliases & Functions {{{
+# ==============================================================================
+
+    # General
+    alias vi="nvim"
+    alias mux="tmuxinator"
+    alias cat="bat"
+    alias grep="grep -v grep | grep --color=auto"
+    alias ping="ping -c6"
+    alias df="duf"
+    alias ls="lsd"
+    alias youtube="youtube-dl -ci -o '%(title)s.%(ext)s' --restrict-filenames -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4'"
+    alias youtube_login="youtube-dl --username=perlporter@gmail.com -ci -o '%(title)s.%(ext)s' --restrict-filenames -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4'"
+    alias youtube_audio="youtube-dl -o '%(title)s.%(ext)s' --extract-audio --audio-format mp3"
+    alias youtube_playlist="youtube-dl -o '%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s' -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4'"
+    alias ssh="ssh -q -C"
+    alias tb="nc termbin.com 9999"
+    alias flushdns='dscacheutil -flushcache'
+
+    # Open vim with z argument
+    v() {
+      if [ -n "$1" ]; then
+        z $1
+      fi
+
+      nvim
+    }
+
+# }}}
+
+# Interactive shell startup scripts {{{
+# ==============================================================================
+
+    # COMMAND-NOT-FOUND
+    HB_CNF_HANDLER="$(brew --repository)/Library/Taps/homebrew/homebrew-command-not-found/handler.sh"
+    if [ -f "$HB_CNF_HANDLER" ]; then
+    source "$HB_CNF_HANDLER";
+    fi
+
+    # FZF
+    export FZF_BASE=/opt/homebrew/bin/fzf
+
+    # if [[ $- == *i* && $0 == '/bin/zsh' ]]; then
+    #     ~/.dotfiles/scripts/login.sh
+    # fi
+
+# }}}
+
+# vim: set nospell foldmethod=marker foldlevel=0:
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
