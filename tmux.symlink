@@ -169,12 +169,21 @@ if-shell "[ -f ~/.tmux_local.conf ]" 'source ~/.tmux_local.conf'
 set -g @plugin 'tmux-plugins/tpm'
 
 set -g @plugin 'dracula/tmux'
-set -g @dracula-plugins "time git weather"
-set -g @dracula-show-left-icon session
-set -g @dracula-show-flags true
-set -g @dracula-ping-server "google.com"
-set -g @dracula-ping-rate 5
-set -g @dracula-show-fahrenheit false
+set -g @dracula-plugins "battery network-ping weather time"
+# Powerline
+# set -g @dracula-show-left-sep 
+# set -g @dracula-show-right-sep 
 set -g @dracula-show-powerline true
+set -g @dracula-show-left-icon 🍺
+# set -g @dracula-show-flags true
+# Network Ping
+set -g @dracula-ping-server "187.93.118.249"
+set -g @dracula-ping-rate 5
+# Weather
+set -g @dracula-show-fahrenheit false
+# Date and Time
+set -g @dracula-military-time true
+set -g @dracula-show-timezone false
+set -g @dracula-day-month true
 
 run -b '~/.tmux/plugins/tpm/tpm'
