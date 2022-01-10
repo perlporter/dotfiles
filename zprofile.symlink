@@ -1,1 +1,11 @@
-eval "$(/opt/homebrew/bin/brew shellenv)"
+case "$OSTYPE" in
+  darwin*)
+		eval "$(/opt/homebrew/bin/brew shellenv)"
+  ;;
+  linux*)
+    # ...
+  ;;
+  dragonfly*|freebsd*|netbsd*|openbsd*)
+    # ...
+  ;;
+esac
