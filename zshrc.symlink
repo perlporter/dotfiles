@@ -114,6 +114,10 @@
     alias tb="nc termbin.com 9999"
     alias flushdns='dscacheutil -flushcache'
 
+    tempo() {
+        curl -sL wttr.in $1
+    }
+
     # Open vim with z argument
     v() {
       if [ -n "$1" ]; then
