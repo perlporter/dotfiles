@@ -64,7 +64,7 @@
     typeset -U path cdpath fpath
 
     # Vim mode
-    bindkey -v
+    # bindkey -v
     export KEYTIMEOUT=1
 
     export LANG=en_US.UTF-8
