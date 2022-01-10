@@ -115,7 +115,7 @@
     alias flushdns='dscacheutil -flushcache'
 
     tempo() {
-        curl -sL wttr.in $1
+        curl -sL wttr.in/$1
     }
 
     # Open vim with z argument
