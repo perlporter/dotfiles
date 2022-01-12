@@ -172,7 +172,7 @@ if-shell "[ -f ~/.tmux_local.conf ]" 'source ~/.tmux_local.conf'
 set -g @plugin 'tmux-plugins/tpm'
 
 set -g @plugin 'dracula/tmux'
-set -g @dracula-plugins "battery git weather time"
+set -g @dracula-plugins "battery git time"
 # Powerline
 # set -g @dracula-show-left-sep 
 # set -g @dracula-show-right-sep 
