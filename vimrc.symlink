@@ -1,0 +1,219 @@
+""
+""  vimrc
+""  Autor: Wendell Borges [perlporter@gmail.com]
+""
+""
+
+"*****************************************************************************
+"" Vim-Plug core
+"*****************************************************************************
+let vimplug_exists=expand('~/.vim/autoload/plug.vim')
+if has('win32')&&!has('win64')
+  let curl_exists=expand('C:\Windows\Sysnative\curl.exe')
+else
+  let curl_exists=expand('curl')
+endif
+
+if !filereadable(vimplug_exists)
+  if !executable(curl_exists)
+    echoerr "You have to install curl or first install vim-plug yourself!"
+    execute "q!"
+  endif
+  echo "Installing Vim-Plug..."
+  echo ""
+  silent exec "!"curl_exists" -fLo " . shellescape(vimplug_exists) . " --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+  let g:not_finish_vimplug = "yes"
+
+  autocmd VimEnter * PlugInstall
+endif
+
+" Required:
+call plug#begin(expand('~/.vim/plugged'))
+
+Plug 'morhetz/gruvbox'
+Plug 'joshdick/onedark.vim'
+Plug 'dracula/vim', { 'as': 'dracula'  }
+Plug 'ryanoasis/vim-devicons'
+Plug 'tpope/vim-commentary'
+Plug 'jiangmiao/auto-pairs'
+
+" Auto-Pairs
+" let g:AutoPairsShortcutToggle = 'C-e'
+
+Plug 'vim-scripts/loremipsum'
+Plug 'tpope/vim-surround'
+Plug 'perlporter/vim-auto-markdown'
+
+"" Basic settings
+set autoread                                     " reload on external changes
+set backspace=indent,eol,start                   " backspace behaviour
+set clipboard=unnamed,unnamedplus                " enable clipboard
+set encoding=utf8                                " enable utf8 support
+set fileencoding=utf-8
+set fileencodings=utf-8
+set fileformats=unix,dos,mac
+set hidden                                       " hide buffers, don't close
+set nowrap                                       " disable wrapping
+set number                                       " show line numbers
+set showcmd                                      " show incomplete commands
+set cmdheight=2                                  " command bar height
+" set term=xterm-256color                          " terminal type
+set wildmenu wildmode=longest:full,full          " wildmode settings
+
+"" UI settings
+filetype plugin indent on                        " enable filetype detection
+set listchars=eol:¶,trail:•,tab:▸\               " whitespace characters
+set scrolloff=999                                " cursor position vertically
+set showmatch                                    " show matching brackets
+set cursorline                                   " cursorline
+set splitbelow                                   " split behavior
+set nowrap                                       " turn on line wrapping
+set linebreak                                    " set soft wrapping
+set showbreak=↪                                  " wrapping character
+set so=10                                        " set lines moving vertical
+syntax on                                        " enable syntax highlightning
+
+"" Remember cursor position
+augroup vimrc-remember-cursor-position
+  autocmd!
+  autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+augroup END
+
+"" Tabs & Indentation
+set autoindent expandtab                         " autoindentation & tabbing
+set shiftwidth=2 softtabstop=2 tabstop=2         " 1 tab = 2 spaces
+
+"" Search settings
+set hlsearch ignorecase incsearch smartcase      " search options
+"hi Search ctermbg=Yellow
+"hi Search ctermfg=Red
+
+"" Undo & Backup
+set nobackup noswapfile nowritebackup            " disable backup/swap files
+
+"" Performace Tunning
+set lazyredraw                                   " enable lazyredraw
+set ttyfast                                      " fast terminal connection
+
+"" Key Mapping
+let mapleader=','                                " leader key
+nnoremap <CR> :noh<CR><CR>                       " unsets the last search
+nnoremap <leader>pv :Ex<CR>                      " using explorer files
+nmap <leader>l :set list!<cr>                    " show invisible
+
+
+"" Compatilibity versions
+if v:version > 703
+  "" Mode Settings
+  let &t_SI.="\e[5 q"                              "SI = INSERT mode
+  let &t_SR.="\e[4 q"                              "SR = REPLACE mode
+  let &t_EI.="\e[1 q"                              "EI = NORMAL mode (ELSE)
+  set colorcolumn=80                               " wrap lines
+  set relativenumber                               " show line relative numbers
+  " set undofile undodir=~/.vim/undo undolevels=9999 " undo options
+
+  Plug 'airblade/vim-gitgutter'
+
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+
+  "" AirLine
+  let g:airline#extensions#tabline#enabled = 1
+  let g:airline_powerline_fonts = 1
+  let g:airline_theme = 'dracula'
+  Plug 'tpope/vim-fugitive'
+  Plug 'sheerun/vim-polyglot'
+  Plug 'Yggdroot/indentLine'
+  Plug 'scrooloose/nerdtree'
+
+  "" NERDTree configuration
+  let g:NERDTreeChDirMode=2
+  let g:NERDTreeIgnore=['node_modules','\.rbc$', '\~$', '\.pyc$', '\.db$', '\.sqlite$', '__pycache__']
+  let g:NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$', '\.bak$', '\~$']
+  let g:NERDTreeShowBookmarks=1
+  let g:nerdtree_tabs_focus_on_files=1
+  let g:NERDTreeMapOpenInTabSilent = '<RightMouse>'
+  let g:NERDTreeWinSize = 50
+  set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite,*node_modules/
+  nmap <C-a> :NERDTreeToggle<CR>
+  Plug 'dense-analysis/ale'
+  "" ALE
+  let g:ale_lint_on_enter = 0
+  let g:ale_linters = {
+  \}
+
+  let g:ale_fixers = {
+  \   '*': ['trim_whitespace'],
+  \}
+
+  " let g:ale_fix_on_save = 1
+
+  "" IndentLine
+  let g:indentLine_faster = 1
+  let g:indentLine_enabled = 1
+  let g:indentLine_concealcursor = 0
+  let g:indentLine_char = '┆'
+  let g:indentLine_fileTypeExclude = [ 'startify' ]
+
+  Plug 'mhinz/vim-startify'
+  " startify
+  " https://github.com/ryanoasis/vim-devicons/issues/302
+  function! StartifyEntryFormat()
+  return 'WebDevIconsGetFileTypeSymbol(absolute_path) ." ". entry_path'
+  endfunction
+
+  " Don't change to directory when selecting a file
+  let g:startify_files_number = 5
+  let g:startify_change_to_dir = 0
+  let g:startify_custom_header = [ ]
+  let g:startify_relative_path = 1
+  let g:startify_use_env = 1
+
+  let g:startify_custom_header = [
+              \ '   ',
+              \ '   ',
+              \ ]
+
+  " Custom startup list, only show MRU from current directory/project
+  let g:startify_lists = [
+  \  { 'type': 'dir',       'header': [ 'Files '. getcwd() ] },
+  \  { 'type': 'sessions',  'header': [ 'Sessions' ]       },
+  \  { 'type': 'bookmarks', 'header': [ 'Bookmarks' ]      },
+  \  { 'type': 'commands',  'header': [ 'Commands' ]       },
+  \ ]
+
+  let g:startify_commands = [
+  \   { 'up': [ 'Update Plugins', ':PlugUpdate' ] },
+  \   { 'cc': [ 'Clean Plugin Manager', ':PlugClean' ] },
+  \   { 'ug': [ 'Upgrade Plugin Manager', ':PlugUpgrade' ] },
+  \ ]
+
+  let g:startify_bookmarks = [
+      \ { 'n': '~/.vimrc' },
+      \ { 't': '~/.tmux.conf' },
+      \ { 'g': '~/.gitconfig' },
+      \ { 'z': '~/.zshrc' }
+  \ ]
+
+  autocmd User Startified setlocal cursorline
+
+endif
+
+
+call plug#end()
+
+fun! SumVis()
+    try
+        let l:a_save = @a
+        norm! gv"ay
+        let @a = substitute(@a,'[^0-9. ]','+','g')
+        exec "norm! '>o"
+        exec "norm! i\<c-r>=\<c-r>a\<cr>"
+     finally
+        let @a = l:a_save
+     endtry
+endfun
+vnoremap <leader>s :<C-u>call SumVis()<cr>
+
+colorscheme dracula
+set background=dark
