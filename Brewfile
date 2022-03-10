@@ -69,6 +69,7 @@ cask "audio-hijack"
 #cask "backblaze"                ## NOT INSTALL
 cask "balenaetcher"
 cask "bartender"
+cask "betterzip"
 cask "deepl"
 cask "discord"
 cask "docker"
@@ -111,6 +112,6 @@ mas "Mactracker", id: 430255202
 mas "Microsoft Remote Desktop", id: 1295203466
 mas "PopClip", id: 445189367
 mas "Pixelmator", id: 407963104
-mas "The Unarchiver", id: 425424353
+#mas "The Unarchiver", id: 425424353
 mas "Telegram", id: 747648890
 mas "Shazam", id: 897118787
