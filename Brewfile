@@ -96,7 +96,7 @@ cask "switchresx"
 #cask "texpad"
 cask "transmission"
 cask "utm"
-cask "vagrant"
+cask "vagrant"			## NEEDS ROSSETA2 - sudo softwareupdate --install-rosetta
 cask "viscosity"
 cask "vmware-fusion"
 cask "vnc-viewer"
