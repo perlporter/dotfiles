@@ -113,6 +113,7 @@ if v:version > 703
   " set undofile undodir=~/.vim/undo undolevels=9999 " undo options
 
   Plug 'airblade/vim-gitgutter'
+  Plug 'vimsence/vimsence'
 
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
@@ -123,7 +124,7 @@ if v:version > 703
   let g:airline_theme = 'dracula'
   Plug 'tpope/vim-fugitive'
   Plug 'sheerun/vim-polyglot'
-  Plug 'Yggdroot/indentLine'
+  " Plug 'Yggdroot/indentLine'
   Plug 'scrooloose/nerdtree'
 
   "" NERDTree configuration
@@ -198,7 +199,6 @@ if v:version > 703
   autocmd User Startified setlocal cursorline
 
 endif
-
 
 call plug#end()
 

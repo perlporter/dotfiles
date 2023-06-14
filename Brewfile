@@ -31,8 +31,10 @@ brew "gnupg"                    #
 brew "grep"                     # GNU grep - ggrep
 brew "htop"                     # top alternative
 brew "imagemagick"
+brew "iperf3"
 brew "jq"
 brew "keychain"
+brew "kubectl"
 brew "lazydocker"               #
 brew "lazygit"                  #
 brew "lolcat"
@@ -43,6 +45,7 @@ brew "neofetch"                 # command-line system information
 brew "neovim"
 brew "noti"                     # trigger a notification
 brew "node"                     #
+brew "nmap"
 brew "python"                   #
 brew "pyenv"                    #
 brew "pyenv-virtualenv"         #
@@ -66,7 +69,7 @@ cask "anydesk"
 #cask "audacity"
 cask "airbuddy"
 cask "audio-hijack" 
-#cask "backblaze"                ## NOT INSTALL
+cask "backblaze"          ## NOT INSTALL, /opt/homebrew/Caskroom/backblaze
 cask "balenaetcher"
 cask "bartender"
 cask "betterzip"
@@ -81,7 +84,10 @@ cask "font-fira-code"
 cask "font-hack-nerd-font"
 cask "font-jetbrains-mono"
 cask "font-jetbrains-mono-nerd-font"
+cask "geekbench"
 cask "gemini"
+cask "kindle"
+brew "inkscape"
 cask "istat-menus"
 #cask "intel-power-gadget"       ## NEEDS PASSWORD
 cask "iterm2"
@@ -91,6 +97,7 @@ cask "raspberry-pi-imager"
 cask "minecraft"
 cask "mpv"
 cask "netspot"
+cask "notion"
 cask "raspberry-pi-imager"
 cask "signal"
 cask "switchresx"
@@ -103,13 +110,17 @@ cask "vmware-fusion"
 cask "vnc-viewer"
 cask "wireshark" 		## NEEDS PASSWORD
 cask "xscreensaver"
+cask "zoc"
+cask "zoom"
 
 # macOS App Store
 mas "1Password 7", id: 1333542190
+mas "Apple Configurator 2", id: 1037126344
 mas "DaisyDisk", id: 411643860
 mas "FruitJuice", id: 671736912
 mas "Mactracker", id: 430255202
 mas "Microsoft Remote Desktop", id: 1295203466
+mas "Pages", id: 409201541
 mas "PopClip", id: 445189367
 mas "Pixelmator", id: 407963104
 #mas "The Unarchiver", id: 425424353

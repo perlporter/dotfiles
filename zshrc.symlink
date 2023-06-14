@@ -88,7 +88,7 @@
     zstyle ':completion:*:complete:(cd|pushd):*' tag-order \
             'local-directories named-directories'
 
-    export NVIM_LISTEN_ADDRESS='/tmp/nvimsocket'
+    #export NVIM_LISTEN_ADDRESS='/tmp/nvimsocket'
     export FZF_DEFAULT_COMMAND='ag -u -g ""'
 
     unsetopt sharehistory
@@ -100,20 +100,21 @@
 
     # General
     alias vi="nvim"
+    alias vim="nvim"
     alias mux="tmuxinator"
     alias cat="bat"
     alias grep="grep -v grep | grep --color=auto"
     alias ping="ping -c6"
     alias df="duf"
     alias ls="lsd"
-    alias youtube="youtube-dl -ci -o '%(title)s.%(ext)s' --restrict-filenames -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4'"
-    alias youtube_login="youtube-dl --username=perlporter@gmail.com -ci -o '%(title)s.%(ext)s' --restrict-filenames -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4'"
-    alias youtube_audio="youtube-dl -o '%(title)s.%(ext)s' --extract-audio --audio-format mp3"
-    alias youtube_playlist="youtube-dl -o '%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s' -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4'"
+    alias youtube="yt-dlp -ci -o '%(title)s.%(ext)s' --restrict-filenames -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4'"
+    alias youtube_login="yt-dlp --username=perlporter@gmail.com -ci -o '%(title)s.%(ext)s' --restrict-filenames -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4'"
+    alias youtube_audio="yt-dlp -o '%(title)s.%(ext)s' --extract-audio --audio-format mp3"
+    alias youtube_playlist="yt-dlp -o '%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s' -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4'"
     alias ssh="ssh -q -C"
     alias tb="nc termbin.com 9999"
     alias flushdns='dscacheutil -flushcache'
-    alias sha256='shasum -a 256'
+    alias sha256sum='shasum -a 256'
 
     tempo() {
         curl -sL wttr.in/$1
